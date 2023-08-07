@@ -8,3 +8,4 @@ then
     git push 
 else    
     git push upstream main
+fi    
