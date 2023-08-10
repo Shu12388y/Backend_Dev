@@ -2,7 +2,6 @@ const http = require("http");
 const path = require("path");
 const fs = require("fs");
 const productController = require("./controller/productController.js");
-
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
@@ -15,7 +14,14 @@ const server = http.createServer((req, res) => {
         });
     } else if (req.url === "/product" && req.method === "GET") {
         productController.productData(req, res); // Calling the productData function from the imported module
-    } else {
+    }
+    else if (req.url.match(/\/product\/([0-9]+)/) && req.method==="GET"){
+        const id = req.url.match(/\/product\/([0-9]+)/)[1];
+        productController.productId(req,res,id)
+    }
+    
+    
+    else {
         res.writeHead(404, {'Content-Type': 'application/json'});
         res.end(JSON.stringify({
             "message": "Wrong Route"

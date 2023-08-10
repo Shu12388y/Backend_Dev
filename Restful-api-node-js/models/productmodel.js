@@ -9,9 +9,16 @@ function findALL(){
  }) 
 
 }
-
-
+function findById(id){
+    return new Promise((resolve,reject)=>{
+        const products=product.find((p)=>p.id===id)
+        resolve(products)
+    })
+   
+}
+findById()
 
 module.exports={
-    findALL
+    findALL,
+    findById
 }
