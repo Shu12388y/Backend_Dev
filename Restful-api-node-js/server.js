@@ -19,6 +19,9 @@ const server = http.createServer((req, res) => {
         const id = req.url.match(/\/product\/([0-9]+)/)[1];
         productController.productId(req,res,id)
     }
+    else if(req.url==="/addproduct" && req.method==="POST"){
+        productController.ProductCreation(req,res)
+    }
     
     
     else {

@@ -1,6 +1,7 @@
 const Product = require("../models/productmodel");
+const {b4:uuid}=require("uuid")
 
-
+// ? get the product
 const productData = async (req, res) => {
     try {
         const products = await Product.findALL();
@@ -12,6 +13,9 @@ const productData = async (req, res) => {
 };
 
 
+
+
+// ? get product by id
 const productId=async(req,res,id)=>{
     try {
         const ProductId=await Product.findById(id);
@@ -38,7 +42,33 @@ const productId=async(req,res,id)=>{
 
 }
 
+
+
+
+
+//? create a product
+
+const ProductCreation=async(req,res)=>{
+    try {
+        const prods={
+            name:"apple",
+            description:"new iphone 14 pro",
+            price:20000,
+            location:"india"
+        }
+        const list=await Product.create(prods)
+        res.writeHead(201,{"Content-Type":"application/json"})
+        res.end(JSON.stringify(list))
+    } catch (error) {
+        console.log(error)
+    }
+   
+
+}
+
+
 module.exports = {
     productData,
-    productId
+    productId,
+    ProductCreation
 };
