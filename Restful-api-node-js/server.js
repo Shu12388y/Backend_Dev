@@ -26,6 +26,10 @@ const server = http.createServer((req, res) => {
         const id = req.url.match(/\/updateproduct\/([0-9]+)/)[1];
         productController.updateProduct(req,res,id)
     }
+    else if(req.url.match(/\/deleteproduct\/([0-9]+)/) && req.method==="DELETE"){
+        const id = req.url.match(/\/deleteproduct\/([0-9]+)/)[1];
+        productController.removeProduct(req,res,id)
+    }
 
 
     else {

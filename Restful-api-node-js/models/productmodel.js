@@ -1,6 +1,6 @@
 // In model we add the product details
 
-const product = require("../data/product.json");
+let product = require("../data/product.json");
 const utilis=require("../utilis.js")
 const {v4:uuidv4}=require("uuid")
 
@@ -36,7 +36,6 @@ function create(prods){
 function update(id,products){
     return new Promise ((resolve,reject)=>{
         const index=product.findIndex((p)=>p.id===id)
-        product[index]={id,...products}
         utilis.writeDataToFile("./data/product.json",product)
         resolve(product[index])
 
@@ -44,9 +43,21 @@ function update(id,products){
     })
 }
 
+
+
+function remove(id){
+    return new Promise((resolve,reject)=>{
+        product=product.filter((p)=>p.id!==id)
+        utilis.writeDataToFile("./data/product.json",product)
+        resolve()
+
+    })
+}
+
 module.exports={
     findALL,
     findById,
     create,
-    update
+    update,
+    remove
 }

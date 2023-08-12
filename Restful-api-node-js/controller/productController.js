@@ -113,8 +113,18 @@ try {
 
 
 // ? delete the product
-const removeProduct =(req,res)=>{
-    
+const removeProduct =async(req,res,id)=>{
+    const product=await Product.findById(id)
+    if(!product){
+        res.writeHead(404,{"Content-type":"application/json"})
+        res.end(JSON.stringify({message:"product not found"}))
+    }
+    else{
+        await Product.remove(id)
+        res.writeHead(200,{"Content-Type":"application/json"})
+        res.end(JSON.stringify({message:"product is deleted"}))
+    }
+
 }
 
 
@@ -122,5 +132,6 @@ module.exports = {
     productData,
     productId,
     ProductCreation,
-    updateProduct
+    updateProduct,
+    removeProduct
 };
