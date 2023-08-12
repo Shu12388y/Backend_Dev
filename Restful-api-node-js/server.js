@@ -15,17 +15,21 @@ const server = http.createServer((req, res) => {
     } else if (req.url === "/product" && req.method === "GET") {
         productController.productData(req, res); // Calling the productData function from the imported module
     }
-    else if (req.url.match(/\/product\/([0-9]+)/) && req.method==="GET"){
+    else if (req.url.match(/\/product\/([0-9]+)/) && req.method === "GET") {
         const id = req.url.match(/\/product\/([0-9]+)/)[1];
-        productController.productId(req,res,id)
+        productController.productId(req, res, id)
     }
-    else if(req.url==="/addproduct" && req.method==="POST"){
-        productController.ProductCreation(req,res)
+    else if (req.url === "/addproduct" && req.method === "POST") {
+        productController.ProductCreation(req, res)
     }
-    
-    
+    else if(req.url.match(/\/updateproduct\/([0-9]+)/) && req.method==="PUT"){
+        const id = req.url.match(/\/updateproduct\/([0-9]+)/)[1];
+        productController.updateProduct(req,res,id)
+    }
+
+
     else {
-        res.writeHead(404, {'Content-Type': 'application/json'});
+        res.writeHead(404, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({
             "message": "Wrong Route"
         }));

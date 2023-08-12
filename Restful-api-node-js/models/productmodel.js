@@ -32,8 +32,21 @@ function create(prods){
     })
 }
 
+
+function update(id,products){
+    return new Promise ((resolve,reject)=>{
+        const index=product.findIndex((p)=>p.id===id)
+        product[index]={id,...products}
+        utilis.writeDataToFile("./data/product.json",product)
+        resolve(product[index])
+
+        
+    })
+}
+
 module.exports={
     findALL,
     findById,
-    create
+    create,
+    update
 }

@@ -1,5 +1,6 @@
 const Product = require("../models/productmodel");
 const {b4:uuid}=require("uuid")
+const utilis=require("../utilis.js")
 
 // ? get the product
 const productData = async (req, res) => {
@@ -49,16 +50,27 @@ const productId=async(req,res,id)=>{
 //? create a product
 
 const ProductCreation=async(req,res)=>{
+
+    
     try {
-        const prods={
-            name:"apple",
-            description:"new iphone 14 pro",
-            price:20000,
-            location:"india"
-        }
-        const list=await Product.create(prods)
-        res.writeHead(201,{"Content-Type":"application/json"})
-        res.end(JSON.stringify(list))
+        let body=''
+        req.on('data',(chuck)=>{
+            body+=chuck.toString()
+        })
+
+        req.on('end',async()=>{
+            const {names,description,price,location}=JSON.parse(body)
+            const prods={
+                names,
+                description,
+                price,
+                location
+            }
+            const list=await Product.create(prods)
+            res.writeHead(201,{"Content-Type":"application/json"})
+            res.end(JSON.stringify(list))
+        })
+       
     } catch (error) {
         console.log(error)
     }
@@ -67,8 +79,48 @@ const ProductCreation=async(req,res)=>{
 }
 
 
+// ? Update a product
+
+const updateProduct=async(req,res,id)=>{
+try {
+    const product=await Product.findById(id)
+    if(!product){
+        res.writeHead(404,{"Content-Type":"application/json"})
+        res.JSON.stringify({message:"product does not exist"})
+    }
+    else{
+        const body=await utilis.getPostData(req)
+        const {name,description,price,location}=JSON.parse(body)
+        const prods={
+            name:name || product.name,
+            description :description || product.description,
+            price:price || product.price,
+            location :location || product.location
+
+        }
+        const updproduct=await Product.update(id,prods)
+        res.writeHead(200,{"Content-Type":"application/json"})
+        res.end(JSON.stringify(updproduct))
+    }
+} catch (error) {
+    console.log(error)
+}
+
+
+
+}
+
+
+
+// ? delete the product
+const removeProduct =(req,res)=>{
+    
+}
+
+
 module.exports = {
     productData,
     productId,
-    ProductCreation
+    ProductCreation,
+    updateProduct
 };
