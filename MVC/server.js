@@ -7,6 +7,8 @@ const homePage=require("./routes/homepage")
 
 app.set("view engine","ejs")
 app.set("views","views")
+
+app.use(express.static('public'))
 app.use(homePage)
 
 
