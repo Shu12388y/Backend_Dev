@@ -1,5 +1,6 @@
 const product=[]
-
+const fs=require("fs")
+const path=require("path")
 
 class Product{
     constructor(title){
@@ -7,7 +8,16 @@ class Product{
     }
 // Prototype
     save(){
-        product.push(this)
+        const filepath=path.join(__dirname,"../","data","product.json")
+        fs.readFile(filepath,(error,content)=>{
+            if(!error){
+                products=JSON.parse(content)
+            }
+            product.push(this)
+            fs.writeFile(filepath,JSON.stringify(products),(err)=>{
+                throw err
+            })
+        })
     }
 
 
