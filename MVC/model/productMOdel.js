@@ -1,5 +1,5 @@
 const product=[]
-const { error } = require("console")
+
 const fs=require("fs")
 const path=require("path")
 
@@ -10,6 +10,7 @@ class Product{
 // Prototype
     save(){
         const filepath=path.join(__dirname,"../","data","product.json")
+        let products="";
         fs.readFile(filepath,(error,content)=>{
             if(!error){
                 products=JSON.parse(content)
