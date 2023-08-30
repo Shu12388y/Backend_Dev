@@ -1,10 +1,8 @@
 const express = require("express");
 const route = express.Router();
-// const model = require("../model/homePageModel");
+const {homeController}=require("../controller/homeController")
 
 // home page route
-route.get("/", (req,res)=>{
-    res.render("index.ejs",{title:"Home page",heading:"Welcome to Our Home Page"})
-});
+route.get("/", homeController );
 
 module.exports = route;
