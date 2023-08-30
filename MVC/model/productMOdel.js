@@ -1,4 +1,5 @@
 const product=[]
+const { error } = require("console")
 const fs=require("fs")
 const path=require("path")
 
@@ -22,7 +23,14 @@ class Product{
 
 
     static fetchAll(){
-        return product
+      fs.readFile(path.join(__dirname,"../","data","product.json"),(error,content)=>{
+        if(error){
+            throw error
+        }
+        else{
+            return JSON.parse(content)
+        }
+      })
     }
 }
 
