@@ -3,6 +3,15 @@ const homeController=(req,res,next)=>{
     
 }
 
+
+const errorController=(req,res,next)=>{
+    res.statusCode=404
+    res.render('404.ejs')
+
+}
+
+
 module.exports={
-    homeController
+    homeController,
+    errorController
 }
