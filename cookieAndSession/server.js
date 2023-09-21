@@ -1,15 +1,14 @@
-const express=require("express")
-const session = require("express-session")
-const PORT=300
-const app =express()
+const express = require("express");
+const session = require("express-session");
+const PORT = 300;
+const app = express();
 
+const getLogin = require("./routes/route");
+const postLogin = require("./routes/route");
 
+app.use(getLogin);
+app.use(postLogin);
 
-
-const { get } = require("./routes/route")
-
-
-
-app.listen(PORT,()=>{
-    console.log("server is on")
-})
+app.listen(PORT, () => {
+  console.log("server is on");
+});
