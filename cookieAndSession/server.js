@@ -6,6 +6,8 @@ const app =express()
 
 
 
+const { get } = require("./routes/route")
+
 
 
 app.listen(PORT,()=>{
