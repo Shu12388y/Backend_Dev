@@ -6,3 +6,5 @@ class model{
        return db.execute("SELECT * FROM user")
     }
 }
+
+module.exports=model
