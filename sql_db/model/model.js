@@ -1,10 +1,9 @@
-const db=require("../util/db")
+const db = require("../util/db");
 
-
-class model{
-    static fetch(){
-       return db.execute("SELECT * FROM user")
-    }
+class model {
+  static fetch() {
+    return db.execute("SELECT * FROM userdb");
+  }
 }
 
-module.exports=model
+module.exports = model;
