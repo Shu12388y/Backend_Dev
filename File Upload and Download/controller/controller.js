@@ -10,7 +10,12 @@ const uploadHandler = (req, res, next) => {
   res.redirect("/");
 };
 
+const downloadHandler = (req, res, next) => {
+  res.render("download.ejs");
+};
+
 module.exports = {
   fileUploader,
   uploadHandler,
+  downloadHandler,
 };
