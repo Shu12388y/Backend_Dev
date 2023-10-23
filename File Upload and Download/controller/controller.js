@@ -15,6 +15,7 @@ const downloadHandler = (req, res, next) => {
 };
 
 const fileDownload = (req, res, next) => {
+  
   const filePath = path.join(__dirname, "../folder", "./test.txt");
 
   fs.readFile(filePath, (err, data) => {
