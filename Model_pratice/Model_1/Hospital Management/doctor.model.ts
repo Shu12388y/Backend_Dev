@@ -1,5 +1,19 @@
 import mongoose from "mongoose";
 
+const hospitalAvaialbleSchema = new mongoose.Schema({
+name:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Hospital",
+
+},
+time:{
+    type: String,
+    required: true,
+
+}
+
+})
+
 // doctor schema
 const doctorSchema = new mongoose.Schema({
     name:{
@@ -20,7 +34,12 @@ const doctorSchema = new mongoose.Schema({
         type: String,
         lowercase: true,
         required: true,
+    },
+    hospitalAvaialble:{
+        type:[hospitalAvaialbleSchema],
+        required: true,
     }
+
 
     
 },{timestamps: true});
