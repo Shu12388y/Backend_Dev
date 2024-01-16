@@ -5,10 +5,20 @@ require('dotenv').config({
 
 const route = require('./routes/route.js');
 const connectDB = require('./db/dataBase.js');
+const cors=require('cors');
+const cookieParser=require('cookie-parser');
+
+
+
+
 
 const app = express();
 
 app.use(route);
+app.use(cors());
+app.use(cookieParser());
+app.use(express.json({ limit: "30mb", extended: true }));
+app.use(express.urlencoded({ limit: "30mb", extended: true }));
 
 connectDB()
     .then(() => {
