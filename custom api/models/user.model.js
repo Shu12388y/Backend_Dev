@@ -79,6 +79,38 @@ userSchema.methods.checkPassword=async function(password){
 }
 
 
+// access token generator
+userSchema.methods.generateAccessToken=function(){
+    return jwt.sign(
+        {
+            _id:this._id,
+            email:this.email,
+            username:this.username,
+            fullname:this.fullname,
+        },
+        process.env.SECRET_ACCESS_TOKEN,
+        {
+            expiresIn:process.env.SECRET_ACCESS_TOKEN_EXPIRY
+        }
+    )
+}
+
+
+userSchema.methods.genrateRefreshToken=function(){
+    return jwt.sign(
+        {
+            _id:this._id
+        },
+        process.env.REFRESH_ACCESS_TOKEN,
+        {
+            expiresIn:process.env.REFRESH_ACCESS_TOKEN_EXPIRY
+        }
+    )
+}
+
+
+
+
 // creating user model
 const  User = mongoose.model("User",userSchema)
 
