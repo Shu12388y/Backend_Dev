@@ -1,15 +1,16 @@
 const {v2} =require('cloudinary');
 const fs=require('fs');
 
-          
-cloudinary.config({ 
+
+// config the cloudinary server 
+v2.config({ 
   cloud_name: process.env.CLOUD_NAME, 
   api_key: process.env.API_KEY, 
   api_secret: process.env.API_SECRET 
 });
 
 
-
+// make  a function to upload the file to cloudinary server
 const uploadFile=async(filepath)=>{
 try {
     if(!filepath) return null;

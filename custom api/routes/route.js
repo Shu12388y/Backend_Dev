@@ -1,14 +1,10 @@
 const express = require('express');
 const route = express.Router();
 const data =require('../data/jokes.json');
+const {helloworld} =require('../controller/helloworld.js');
 
 
-
-route.get('/', (req, res) => {
-res.json({
-    message: "Hello World"
-})
-})
+route.get('/', helloworld)
 
 route.get("/health",(req,res)=>{
     res.json({
