@@ -19,9 +19,12 @@ try {
         resource_type:'auto',
     })
     console.log('file uploaded successfully',response.url)
+    fs.unlink(filepath)
     return response
 } catch (error) {
     fs.unlinkSync(filepath)
     console.error(error)
 }
 }
+
+export default uploadFile;
