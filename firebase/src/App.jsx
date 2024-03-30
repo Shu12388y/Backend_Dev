@@ -5,13 +5,15 @@ import { useState } from "react";
 import userSignUp from "./api/login";
 import userSignIn from "./api/signIn";
 import {getData}  from "./api/database";
-
+import { getRealTimeData } from "./api/realtimeDatabase";
 // const db = getDatabase(app);
 function App() {
   const [data, setData] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user,setUser] = useState([])
+  const [name,setName] = useState("")
+  const [phonenumber,setPhonenumber] = useState("") 
 
   const authUser = async () => {
     await userSignUp(email, password);
@@ -27,6 +29,13 @@ function App() {
     const data = await userData
     setUser(data)
   }
+
+  const realTimeData = async()=>{
+    const userRealtimedata = await getRealTimeData(name,email,phonenumber);
+  }
+
+
+
   return (
     <>
       <h1>Welcome to Firebase</h1>
@@ -46,6 +55,14 @@ function App() {
       })}
       <input type="email" onChange={(e) => setEmail(e.target.value)} />
       <input type="password" onChange={(e) => setPassword(e.target.value)} />
+
+      <h1>Real Time Database</h1>
+
+      <input type="text" onChange={(e) => setName(e.target.value)} />
+      <input type="text" onChange={(e) => setEmail(e.target.value)} />
+      <input type="number" onChange={(e) => setPhonenumber(e.target.value)} />
+      <button onClick={realTimeData}>Update</button>
+      
       <br />
       <button onClick={authUser}>signup</button>
       <button onClick={loginUser}>Log In</button>
