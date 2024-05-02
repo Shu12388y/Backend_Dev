@@ -7,12 +7,12 @@ import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser";
 import pkg from "body-parser";
-import helmet from "helmet"
-import { createYoga } from 'graphql-yoga'
+import helmet from "helmet";
+import graphqlRoute from "./routes/graphql.route.js";
+import ruruRouter from "./routes/ruru.route.js";
 
 
 const app = express()
-
 
 
 // configure middlewares
@@ -23,15 +23,20 @@ app.use(cors({
 }));
 app.use(cookieParser());
 app.use(urlencoded({extended:'true',limit:'16kb'}));
-app.use(helmet())
+// app.use(helmet());
+app.use(ruruRouter)
+
+app.use(graphqlRoute)
 
 
 
 
 
-app.use("/",(_req,res)=>{
-    res.send("<h1>Hello World</h1>")
-})
+
+
+
+
+
 
 
 app.listen(process.env.PORT, () => {
