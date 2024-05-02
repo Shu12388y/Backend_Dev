@@ -75,12 +75,16 @@ const registerUser = asynchandler(async (req, res) => {
         new ApiResponse(200, createUser, "User created successfully")
     )
 
-
-
-
-
-
 })
+
+const loginUser = asynchandler(async (req, res) => {
+
+    
+})
+
+
+
+
 
 
 
